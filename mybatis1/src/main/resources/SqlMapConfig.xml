@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--properties标签表示属性引入外部文件标签-->
+    <properties resource="db.properties"></properties>
+    <!--设置-->
+    <settings>
+        <!--设置打印sql语句-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <!--别名设置-->
+    <typeAliases >
+     <!--以扫描包的形式去设置别名，别名是当前类的类名-->
+        <package name="k8512.pojo"></package>
+    </typeAliases>
+    <!--连接数据库的环境设置-->
+    <environments default="development"><!--开发环境-->
+        <environment id="development"><!--设置环境的标识-->
+            <transactionManager type="JDBC"/><!--事务的类型-->
+            <!--POOLED表示合并数据源，连接数据库的时候允许多种数据源同时连接数据源-->
+            <dataSource type="POOLED"><!--连接数据库的数据源-->
+                 <property name="driver" value="${jdbc.driver}"></property>
+                 <property name="url" value="${jdbc.url}"></property>
+                 <property name="username" value="${jdbc.username}"></property>
+                 <property name="password" value="${jdbc.password}"></property>
+                 
+           </dataSource>
+        </environment>
+    </environments>
+    <!--映射器在核心配置文件中关联映射实体类映射文件-->
+    <mappers>
+        <mapper resource="k8512/mapper/BookMapper.xml"></mapper>
+    </mappers>
+</configuration>

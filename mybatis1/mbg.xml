@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!--生成配置标签-->
+<generatorConfiguration>
+  <!--targetRuntime运行目标, MyBatis3-->
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+    <commentGenerator>
+      <!-- 是否去除自动生成的注释 -->
+			<property name="suppressAllComments" value="true" />
+	</commentGenerator>
+    <!--jdbc连接配置-->
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://localhost:3306/mydb?characterEncoding=UTF-8"
+        userId="root"
+        password="root">
+    </jdbcConnection>
+    <!-- 默认为false，把JDBC DECIMAL 和NUMERIC类型解析为Integer，为true时
+        把JDBC DECIMAL 和NUMERIC类型解析为java.math.BigDecimal -->
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+  <!--实体类生成配置
+  targetPackage生成的实体类所处于的文件夹路径
+  targetProject表示目标根目录
+  -->
+    <javaModelGenerator targetPackage="k8512.pojo" targetProject=".\src\main\java">
+      <!-- enableSubPackages:是否让schema作为包的后缀 -->
+      <property name="enableSubPackages" value="true" />
+      <!-- 从数据库返回的值被清理前后的空格 -->
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+    <!--sql映射文件配置-->
+    <sqlMapGenerator targetPackage="k8512.mapper"  targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+  <!--mapper接口配置-->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="k8512.mapper"  targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+<!--数据库表生成实体类的配置
+tableName表名
+domainObjectName实体类类名
+-->
+    <table  tableName="book" domainObjectName="Book" >
+    </table>
+    <table  tableName="type" domainObjectName="Type" >
+    </table>
+  </context>
+</generatorConfiguration>
